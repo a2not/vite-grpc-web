@@ -6,7 +6,6 @@ grpc-web can be used with vite. here's how.
 
 ```
 npm install
-npm link ./src/grpc-web-client-gen/
 npm run dev
 ```
 
