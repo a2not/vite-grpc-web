@@ -9,9 +9,9 @@ npm install
 npm run dev
 ```
 
-yarn link (`"grpc-web-client-gen": "link:./src/grpc-web-client-gen/"` in package.json) works fine as well. (I prefer this because it can be explicitly written in package.json)
+yarn link (`"grpc-web-client-gen": "link:./src/grpc-web-client-gen/"` in package.json) works fine as well.
 
-File dependencies (`"grpc-web-client-gen": "file:./src/grpc-web-client-gen/"` in package.json) works fine, but need to run `npm install` or `yarn install` every time generated files changed.
+Copied file dependencies with yarn (`"grpc-web-client-gen": "file:./src/grpc-web-client-gen/"` in package.json) works too, but need to run `yarn install` every time generated files changed so I don't recommend.
 
 The only thing to note is that if you use linked dependencies like this repo does (or yarn link mentioned above), you need [resolve.preserveSymlinks](https://vitejs.dev/config/shared-options.html#resolve-preservesymlinks) to be `true`.
 
