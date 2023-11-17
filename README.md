@@ -1,3 +1,5 @@
+This repo is for demonstration purpose only, regarding the ongoing discussions like [grpc-web #1242](https://github.com/grpc/grpc-web/issues/1242) and [vite #8926](https://github.com/vitejs/vite/discussions/8926)
+
 # vite-grpc-web
 
 grpc-web can be used with vite. here's how.
