@@ -1,9 +1,14 @@
 import { FormEventHandler, useState } from 'react'
 import './App.css'
-import { EchoServiceClient } from 'grpc-web-client-gen/EchoServiceClientPb';
-import { EchoRequest } from 'grpc-web-client-gen/echo_pb';
+import { createPromiseClient } from "@connectrpc/connect";
+import { createGrpcWebTransport } from "@connectrpc/connect-web";
+import { EchoService } from "./connect-web-gen/echo_connect";
 
-const echoClient = new EchoServiceClient('http://localhost:8080')
+const transport = createGrpcWebTransport({
+    baseUrl: "http://localhost:8080",
+});
+
+const echoClient = createPromiseClient(EchoService, transport);
 
 function App() {
     return (
@@ -26,10 +31,10 @@ function EchoServiceForm() {
         const form = new FormData(event.currentTarget);
         const inputMessage = form.get("inputMessage")?.toString() || "";
 
-        const req = new EchoRequest()
-        req.setMessage(inputMessage);
-        const resp = await echoClient.echo(req, null)
-        setOutputMessage(resp.getMessage())
+        const resp = await echoClient.echo({
+            message: inputMessage,
+        });
+        setOutputMessage(resp.message)
     };
 
     return (

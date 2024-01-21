@@ -1,0 +1,11 @@
+# https://connectrpc.com/docs/web/generating-code
+version: v1
+plugins:
+  - plugin: es
+    out: src/connect-web-gen
+    opt:
+      - target=ts
+  - plugin: connect-es
+    out: src/connect-web-gen
+    opt:
+      - target=ts
