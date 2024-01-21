@@ -1,9 +1,13 @@
 import { FormEventHandler, useState } from 'react'
 import './App.css'
-import { EchoServiceClient } from 'grpc-web-client-gen/EchoServiceClientPb';
-import { EchoRequest } from 'grpc-web-client-gen/echo_pb';
+import {GrpcWebFetchTransport} from '@protobuf-ts/grpcweb-transport'
+import { EchoServiceClient } from './protobuf-ts-gen/echo.client'
+import { EchoRequest } from './protobuf-ts-gen/echo'
 
-const echoClient = new EchoServiceClient('http://localhost:8080')
+const transport = new GrpcWebFetchTransport({
+    baseUrl: "http://localhost:8080"
+})
+const echoClient = new EchoServiceClient(transport)
 
 function App() {
     return (
@@ -26,10 +30,9 @@ function EchoServiceForm() {
         const form = new FormData(event.currentTarget);
         const inputMessage = form.get("inputMessage")?.toString() || "";
 
-        const req = new EchoRequest()
-        req.setMessage(inputMessage);
-        const resp = await echoClient.echo(req, null)
-        setOutputMessage(resp.getMessage())
+        const req = EchoRequest.create({message: inputMessage});
+        const { response } = await echoClient.echo(req)
+        setOutputMessage(response.message)
     };
 
     return (

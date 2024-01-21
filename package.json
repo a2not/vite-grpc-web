@@ -7,10 +7,12 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "gen:protobuf-ts": "npx protoc -I=./proto echo.proto --ts_out=./src/protobuf-ts-gen"
     },
     "dependencies": {
-        "grpc-web-client-gen": "file:src/grpc-web-client-gen",
+        "@protobuf-ts/grpcweb-transport": "^2.9.3",
+        "@protobuf-ts/plugin": "^2.9.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
