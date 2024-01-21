@@ -7,12 +7,14 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "gen:ts-proto": "protoc -I=./proto echo.proto --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=.:./src/ts-proto-gen --ts_proto_opt=outputClientImpl=grpc-web"
     },
     "dependencies": {
-        "grpc-web-client-gen": "file:src/grpc-web-client-gen",
+        "@improbable-eng/grpc-web": "^0.15.0",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "ts-proto": "^1.166.4"
     },
     "devDependencies": {
         "@types/react": "^18.2.37",
